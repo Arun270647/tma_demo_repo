@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { HelmetProvider } from 'react-helmet-async';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { TooltipProvider } from "./components/ui/tooltip";
+import { Toaster } from "./components/ui/toaster";
+import { Toaster as Sonner } from "./components/ui/sonner";
 import './App.css';
 import {
   initializeBadge,
@@ -52,6 +56,10 @@ import BlogLoginPage from './components/BlogLoginPage';
 import BlogWriterDashboard from './components/BlogWriterDashboard';
 import BlogAdminDashboard from './components/BlogAdminDashboard';
 import BlogsPage from './components/BlogsPage';
+import BlogIndex from './pages/blog_integrated/Index';
+import BlogDetail from './pages/blog_integrated/BlogDetail';
+
+const queryClient = new QueryClient();
 
 /**
  * Root application component that configures top-level providers and client-side routing.
@@ -137,104 +145,112 @@ function App() {
     <HelmetProvider>
       <AuthProvider>
         <ThemeProvider>
-          <Router>
-            <div className="App relative">
-              {/* PWA Components */}
-              <NotificationPermission />
-              <UpdateNotification />
+          <QueryClientProvider client={queryClient}>
+            <TooltipProvider>
+              <Router>
+                <div className="App relative">
+                  <Toaster />
+                  <Sonner />
+                  {/* PWA Components */}
+                  <NotificationPermission />
+                  <UpdateNotification />
 
-              <Routes>
-                {/* Public Routes */}
-                <Route path="/" element={<PWARouter />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/player-login" element={<PlayerLoginPage />} />
+                  <Routes>
+                    {/* Public Routes */}
+                    <Route path="/" element={<PWARouter />} />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/player-login" element={<PlayerLoginPage />} />
 
-                {/* New Public Pages */}
-                <Route path="/founders" element={<FoundersPage />} />
-                <Route path="/team" element={<TeamPage />} />
-                <Route path="/contact" element={<ContactPage />} />
-                <Route path="/careers" element={<CareersPage />} />
-                <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-                <Route path="/terms-of-service" element={<TermsOfServicePage />} />
+                    {/* New Public Pages */}
+                    <Route path="/founders" element={<FoundersPage />} />
+                    <Route path="/team" element={<TeamPage />} />
+                    <Route path="/contact" element={<ContactPage />} />
+                    <Route path="/careers" element={<CareersPage />} />
+                    <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+                    <Route path="/terms-of-service" element={<TermsOfServicePage />} />
 
-                {/* NEW CAREER ROUTES */}
-                <Route path="/careers" element={<CareersPage />} />
-                <Route path="/careers/:jobId" element={<JobDetailsPage />} />
-                <Route path="/careers/apply/:jobId" element={<JobApplyPage />} />
+                    {/* NEW CAREER ROUTES */}
+                    <Route path="/careers" element={<CareersPage />} />
+                    <Route path="/careers/:jobId" element={<JobDetailsPage />} />
+                    <Route path="/careers/apply/:jobId" element={<JobApplyPage />} />
 
-                {/* BLOG ROUTES */}
-                <Route path="/blogs" element={<BlogsPage />} />
+                    {/* BLOG ROUTES */}
+                    <Route path="/blogs" element={<BlogsPage />} />
+                    <Route path="/blog-new" element={<BlogIndex />} />
+                    <Route path="/blog-new/:slug" element={<BlogDetail />} />
 
-                {/* INTERNAL BLOG ROUTES (hidden from navigation) */}
-                <Route path="/internal/blog-login" element={<BlogLoginPage />} />
-                <Route
-                  path="/internal/writer"
-                  element={
-                    <ProtectedRoute>
-                      <BlogWriterDashboard />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/internal/admin"
-                  element={
-                    <ProtectedRoute>
-                      <BlogAdminDashboard />
-                    </ProtectedRoute>
-                  }
-                />
+                    {/* INTERNAL BLOG ROUTES (hidden from navigation) */}
+                    <Route path="/internal/blog-login" element={<BlogLoginPage />} />
+                    <Route
+                      path="/internal/writer"
+                      element={
+                        <ProtectedRoute>
+                          <BlogWriterDashboard />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path="/internal/admin"
+                      element={
+                        <ProtectedRoute>
+                          <BlogAdminDashboard />
+                        </ProtectedRoute>
+                      }
+                    />
 
-                {/* Protected Routes - Super Admin Dashboard */}
-                <Route
-                  path="/dashboard"
-                  element={
-                    <ProtectedRoute>
-                      <Dashboard />
-                    </ProtectedRoute>
-                  }
-                />
+                    {/* Protected Routes - Super Admin Dashboard */}
+                    <Route
+                      path="/dashboard"
+                      element={
+                        <ProtectedRoute>
+                          <Dashboard />
+                        </ProtectedRoute>
+                      }
+                    />
 
-                {/* Academy-specific protected route */}
-                <Route
-                  path="/academy"
-                  element={
-                    <ProtectedRoute>
-                      <AcademyDashboard />
-                    </ProtectedRoute>
-                  }
-                />
+                    {/* Academy-specific protected route */}
+                    <Route
+                      path="/academy"
+                      element={
+                        <ProtectedRoute>
+                          <AcademyDashboard />
+                        </ProtectedRoute>
+                      }
+                    />
 
-                {/* Player-specific protected route */}
-                <Route
-                  path="/player-dashboard"
-                  element={
-                    <ProtectedRoute>
-                      <PlayerDashboardNew />
-                    </ProtectedRoute>
-                  }
-                />
+                    {/* Player-specific protected route */}
+                    <Route
+                      path="/player-dashboard"
+                      element={
+                        <ProtectedRoute>
+                          <PlayerDashboardNew />
+                        </ProtectedRoute>
+                      }
+                    />
 
-                {/* Coach Routes with Layout */}
-                <Route
-                  path="/coach/*"
-                  element={
-                    <ProtectedRoute>
-                      <CoachLayout />
-                    </ProtectedRoute>
-                  }
-                >
-                  <Route path="dashboard" element={<CoachDashboard />} />
-                  <Route path="attendance" element={<AttendanceTracker />} />
-                  <Route path="performance" element={<PerformanceAnalytics />} />
-                  <Route path="profile" element={<CoachProfile />} />
-                </Route>
-              </Routes>
-            </div>
-          </Router>
+                    {/* Coach Routes with Layout */}
+                    <Route
+                      path="/coach/*"
+                      element={
+                        <ProtectedRoute>
+                          <CoachLayout />
+                        </ProtectedRoute>
+                      }
+                    >
+                      <Route path="dashboard" element={<CoachDashboard />} />
+                      <Route path="attendance" element={<AttendanceTracker />} />
+                      <Route path="performance" element={<PerformanceAnalytics />} />
+                      <Route path="profile" element={<CoachProfile />} />
+                    </Route>
+                  </Routes>
+                </div>
+              </Router>
+            </TooltipProvider>
+          </QueryClientProvider>
         </ThemeProvider>
       </AuthProvider>
- </HelmetProvider>
- );
+    </HelmetProvider>
+  );
 }
 
 export default App;
