@@ -108,7 +108,7 @@ export default function BlogWriterDashboard() {
 
   const handleLogout = async () => {
     await signOut();
-    navigate('/internal/blog-login');
+    navigate('/blog/login');
   };
 
   const getStatusBadge = (status) => {
@@ -175,8 +175,8 @@ export default function BlogWriterDashboard() {
                   key={filter}
                   onClick={() => setStatusFilter(filter)}
                   className={`px-4 py-2 rounded-lg font-medium transition-colors ${statusFilter === filter
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-white text-gray-700 hover:bg-gray-100'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-white text-gray-700 hover:bg-gray-100'
                     }`}
                 >
                   {filter.charAt(0).toUpperCase() + filter.slice(1)}

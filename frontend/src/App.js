@@ -189,7 +189,7 @@ function App() {
                     <Route path="/blog/:slug" element={<BlogDetail />} />
                     <Route path="/blog/*" element={<BlogNotFound />} />
                     <Route
-                      path="/internal/admin"
+                      path="/blog/admin"
                       element={
                         <ProtectedRoute>
                           <BlogAdminDashboard />

@@ -83,10 +83,10 @@ export default function BlogLoginPage() {
 
             if (adminCheckResponse.ok) {
               // User is admin
-              navigate("/internal/admin", { replace: true });
+              navigate("/blog/admin", { replace: true });
             } else {
               // User is writer
-              navigate("/internal/writer", { replace: true });
+              navigate("/blog/dashboard", { replace: true });
             }
           } else {
             setError("Failed to verify blog access. Please try again.");

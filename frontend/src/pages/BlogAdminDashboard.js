@@ -72,7 +72,7 @@ export default function BlogAdminDashboard() {
 
   const handleLogout = async () => {
     await signOut();
-    navigate('/internal/blog-login');
+    navigate('/blog/login');
   };
 
   const getStatusBadge = (status) => {
@@ -147,8 +147,8 @@ export default function BlogAdminDashboard() {
                   key={tab}
                   onClick={() => setActiveTab(tab)}
                   className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === tab
-                      ? 'border-blue-500 text-blue-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    ? 'border-blue-500 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                     }`}
                 >
                   {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -386,8 +386,8 @@ function ReviewModal({ post, onClose, onSubmit }) {
                   type="button"
                   onClick={() => setAction('approve')}
                   className={`flex-1 py-3 rounded-lg font-medium transition-colors ${action === 'approve'
-                      ? 'bg-green-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-green-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                 >
                   <CheckCircle className="w-5 h-5 inline mr-2" />
@@ -397,8 +397,8 @@ function ReviewModal({ post, onClose, onSubmit }) {
                   type="button"
                   onClick={() => setAction('reject')}
                   className={`flex-1 py-3 rounded-lg font-medium transition-colors ${action === 'reject'
-                      ? 'bg-red-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-red-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                 >
                   <X className="w-5 h-5 inline mr-2" />
