@@ -52,12 +52,13 @@ import TermsOfServicePage from './components/TermsOfServicePage';
 import CareersPage from './components/CareersPage';
 import JobDetailsPage from './components/JobDetailsPage';
 import JobApplyPage from './components/JobApplyPage';
-import BlogLoginPage from './components/BlogLoginPage';
-import BlogWriterDashboard from './components/BlogWriterDashboard';
-import BlogAdminDashboard from './components/BlogAdminDashboard';
-import BlogsPage from './components/BlogsPage';
-import BlogIndex from './pages/blog_integrated/Index';
-import BlogDetail from './pages/blog_integrated/BlogDetail';
+import BlogLoginPage from './pages/BlogLoginPage';
+import BlogWriterDashboard from './pages/BlogWriterDashboard';
+import BlogAdminDashboard from './pages/BlogAdminDashboard';
+import BlogsPage from './pages/BlogsPage';
+import BlogIndex from './pages/Index';
+import BlogDetail from './pages/BlogDetail';
+import BlogNotFound from './pages/NotFound';
 
 const queryClient = new QueryClient();
 
@@ -175,22 +176,20 @@ function App() {
                     <Route path="/careers/apply/:jobId" element={<JobApplyPage />} />
 
                     {/* BLOG ROUTES */}
-                    <Route path="/blogs" element={<BlogsPage />} />
-                    <Route path="/blog-new" element={<BlogIndex />} />
-                    <Route path="/blog-new/:slug" element={<BlogDetail />} />
-
-                    {/* INTERNAL BLOG ROUTES (hidden from navigation) */}
-                    <Route path="/internal/blog-login" element={<BlogLoginPage />} />
+                    <Route path="/blog" element={<BlogsPage />} />
+                    <Route path="/blog/login" element={<BlogLoginPage />} />
                     <Route
-                      path="/internal/writer"
+                      path="/blog/dashboard"
                       element={
                         <ProtectedRoute>
                           <BlogWriterDashboard />
                         </ProtectedRoute>
                       }
                     />
+                    <Route path="/blog/:slug" element={<BlogDetail />} />
+                    <Route path="/blog/*" element={<BlogNotFound />} />
                     <Route
-                      path="/internal/admin"
+                      path="/blog/admin"
                       element={
                         <ProtectedRoute>
                           <BlogAdminDashboard />

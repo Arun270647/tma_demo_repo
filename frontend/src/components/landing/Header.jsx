@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { HashLink as Link } from 'react-router-hash-link'; 
-import { FloatingDock } from "../ui/floating-dock"; 
+import { HashLink as Link } from 'react-router-hash-link';
+import { FloatingDock } from "../ui/floating-dock";
 
 // --- STATIC DATA (Text Labels instead of Icons) ---
 const dockLinks = [
@@ -30,7 +30,7 @@ const dockLinks = [
   {
     title: "Blog",
     icon: "Blog",
-    href: "/blogs"
+    href: "/blog"
   },
   {
     title: "Contact",
@@ -52,7 +52,7 @@ const Header = () => {
       const isScrolled = window.scrollY > 20;
       setScrolled(prev => (prev !== isScrolled ? isScrolled : prev));
     };
-    
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -65,12 +65,12 @@ const Header = () => {
     if (location.pathname === '/') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      navigate('/#'); 
+      navigate('/#');
     }
   };
 
   const handleMobileLinkClick = (path) => {
-    setIsMobileMenuOpen(false); 
+    setIsMobileMenuOpen(false);
     if (path === '/') {
       handleHomeClick();
     } else {
@@ -97,12 +97,11 @@ const Header = () => {
         initial={{ y: isHomePage ? -100 : 0 }}
         animate={{ y: 0 }}
         transition={{ duration: isHomePage ? 0.5 : 0, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'bg-black/95 shadow-lg' : 'bg-black'
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-black/95 shadow-lg' : 'bg-black'
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 relative">
-          
+
           {/* Grid Layout */}
           <div className="h-20 grid grid-cols-3 items-center md:flex md:justify-between">
 
@@ -116,15 +115,15 @@ const Header = () => {
                 {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
               </button>
 
-              <button 
+              <button
                 onClick={handleHomeClick}
                 className="hidden md:flex items-center hover:opacity-80 transition-opacity z-50"
               >
-                <img 
-                  src="https://customer-assets.emergentagent.com/job_athlete-tracker-20/artifacts/7g46lw3u_tma-white.png" 
-                  alt="TMA Logo" 
+                <img
+                  src="https://customer-assets.emergentagent.com/job_athlete-tracker-20/artifacts/7g46lw3u_tma-white.png"
+                  alt="TMA Logo"
                   className="h-8 w-auto"
-                  loading="eager" 
+                  loading="eager"
                 />
               </button>
             </div>
@@ -132,23 +131,23 @@ const Header = () => {
             {/* --- 2. CENTER SECTION (Desktop Floating Dock) --- */}
             <div className="flex justify-center items-center">
               {/* Mobile Logo */}
-              <button 
+              <button
                 onClick={handleHomeClick}
                 className="flex md:hidden items-center hover:opacity-80 transition-opacity z-50"
               >
-                <img 
-                  src="https://customer-assets.emergentagent.com/job_athlete-tracker-20/artifacts/7g46lw3u_tma-white.png" 
-                  alt="TMA Logo" 
+                <img
+                  src="https://customer-assets.emergentagent.com/job_athlete-tracker-20/artifacts/7g46lw3u_tma-white.png"
+                  alt="TMA Logo"
                   className="h-8 w-auto"
                 />
               </button>
 
               {/* DESKTOP: Floating Text Dock */}
               <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center">
-                 <FloatingDock 
-                    items={dockLinks}
-                    desktopClassName="bg-transparent border-none shadow-none" 
-                 />
+                <FloatingDock
+                  items={dockLinks}
+                  desktopClassName="bg-transparent border-none shadow-none"
+                />
               </div>
             </div>
 
@@ -182,7 +181,7 @@ const Header = () => {
               <Link to="/#about" smooth onClick={() => setIsMobileMenuOpen(false)} className="text-white/80 hover:text-white text-lg font-medium">About</Link>
               <Link to="/#features" smooth onClick={() => setIsMobileMenuOpen(false)} className="text-white/80 hover:text-white text-lg font-medium">Features</Link>
               <Link to="/#pricing" smooth onClick={() => setIsMobileMenuOpen(false)} className="text-white/80 hover:text-white text-lg font-medium">Pricing</Link>
-              <Link to="/blogs" smooth={false} onClick={() => setIsMobileMenuOpen(false)} className="text-white/80 hover:text-white text-lg font-medium">Blog</Link>
+              <Link to="/blog" smooth={false} onClick={() => setIsMobileMenuOpen(false)} className="text-white/80 hover:text-white text-lg font-medium">Blog</Link>
             </nav>
             <div className="mt-4 flex justify-center">
               <Link to="/contact#" smooth={false} onClick={() => setIsMobileMenuOpen(false)} className="text-white/80 hover:text-white text-lg font-medium">Contact</Link>

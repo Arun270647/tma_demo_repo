@@ -10,11 +10,11 @@ const Navbar = () => {
         {/* Logo - Updated to only show a larger TMA logo */}
         <div className="flex items-center">
           <Link to="/" className="flex items-center" aria-label="Track My Academy - Sports Academy Management Software Home">
-            <img 
-              src="https://customer-assets.emergentagent.com/job_602f5f47-7e7e-407d-b35e-9ed8dfafa24e/artifacts/e13u80sz_TMA%20LOGO%20without%20bg.png" 
+            <img
+              src="https://customer-assets.emergentagent.com/job_602f5f47-7e7e-407d-b35e-9ed8dfafa24e/artifacts/e13u80sz_TMA%20LOGO%20without%20bg.png"
               alt="Track My Academy Logo - Sports Academy Management Software"
               // Adjusted classes for a proper navbar size for the logo
-              className="w-auto h-8 sm:h-10 object-contain" 
+              className="w-auto h-8 sm:h-10 object-contain"
             />
             {/* Removed the <h1> tag for 'Track My Academy' text */}
           </Link>
@@ -22,21 +22,22 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8" role="navigation" aria-label="Main navigation">
+          <Link to="/blog" className="text-gray-700 hover:text-blue-500 transition-colors font-medium">Blog</Link>
           <a href="/#about" className="text-gray-700 hover:text-blue-500 transition-colors font-medium">About Us</a>
           <a href="/#pricing" className="text-gray-700 hover:text-blue-500 transition-colors font-medium">Pricing</a>
         </nav>
 
         {/* Desktop CTA Buttons */}
         <div className="hidden md:flex items-center space-x-4">
-          <Link 
-            to="/contact" 
+          <Link
+            to="/contact"
             className="text-gray-700 hover:text-blue-500 transition-colors font-medium"
             aria-label="Contact Track My Academy for demos and support"
           >
             Contact Us
           </Link>
-          <Link 
-            to="/login" 
+          <Link
+            to="/login"
             className="bg-blue-500 text-white font-semibold py-2.5 px-6 rounded-lg hover:bg-blue-600 transition-colors shadow-lg hover:shadow-blue-200"
             aria-label="Login to Track My Academy platform"
           >
@@ -45,17 +46,17 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <button 
+        <button
           className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-expanded={isMobileMenuOpen}
           aria-controls="mobile-menu"
           aria-label="Toggle mobile navigation menu"
         >
-          <svg 
-            className={`w-6 h-6 text-gray-700 transition-transform ${isMobileMenuOpen ? 'rotate-45' : ''}`} 
-            fill="none" 
-            stroke="currentColor" 
+          <svg
+            className={`w-6 h-6 text-gray-700 transition-transform ${isMobileMenuOpen ? 'rotate-45' : ''}`}
+            fill="none"
+            stroke="currentColor"
             viewBox="0 0 24 24"
             aria-hidden="true"
           >
@@ -75,14 +76,14 @@ const Navbar = () => {
               <a href="/#about" className="block text-gray-700 hover:text-blue-500 transition-colors font-medium py-2">About</a>
               <a href="/#pricing" className="block text-gray-700 hover:text-blue-500 transition-colors font-medium py-2">Pricing</a>
               <div className="border-t border-gray-100 pt-4 space-y-3">
-                <Link 
-                  to="/contact" 
+                <Link
+                  to="/contact"
                   className="block text-gray-700 hover:text-blue-500 transition-colors font-medium py-2"
                 >
                   Contact Us
                 </Link>
-                <Link 
-                  to="/login" 
+                <Link
+                  to="/login"
                   className="block bg-blue-500 text-white font-semibold py-2.5 px-6 rounded-lg hover:bg-blue-600 transition-colors text-center"
                 >
                   Login
